@@ -75,7 +75,7 @@ Alternatively, instead of passing an array of strings to the rule, you can pass 
 use JonPurvis\Squeaky\Enums\Locale;
 use JonPurvis\Squeaky\Rules\Clean;
 
-'name' => ['required', 'string', 'max:255', new Clean([Locale::English, Locale::Italian])],
+'name' => ['required', 'string', 'max:255', new Clean([Locale::English->value, Locale::Italian->value])],
 ```
 
 
