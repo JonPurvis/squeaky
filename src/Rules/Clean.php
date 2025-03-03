@@ -23,7 +23,7 @@ class Clean implements ValidationRule
 
         foreach ($locales as $locale) {
 
-            dd($locale);
+            dd($locale->value);
 
             $profanities = Config::get($this->configFileName($locale));
             $tolerated = Config::get('profanify-tolerated');
