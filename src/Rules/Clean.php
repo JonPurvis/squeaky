@@ -21,9 +21,10 @@ class Clean implements ValidationRule
 
         $this->ensureLocalesAreValid($locales);
 
-        dd($locales);
-
         foreach ($locales as $locale) {
+
+            dd($locale);
+
             $profanities = Config::get($this->configFileName($locale));
             $tolerated = Config::get('profanify-tolerated');
 
