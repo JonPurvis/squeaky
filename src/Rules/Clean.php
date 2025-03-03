@@ -22,16 +22,13 @@ class Clean implements ValidationRule
         $this->ensureLocalesAreValid($locales);
 
         foreach ($locales as $locale) {
-
-            dd($locale->value);
-
             $profanities = Config::get($this->configFileName($locale));
             $tolerated = Config::get('profanify-tolerated');
 
             if (Str::contains(Str::lower(Str::remove($tolerated, $value)), $profanities)) {
                 $fail(trans('message'))->translate([
                     'attribute' => $attribute,
-                ], $locale);
+                ], $locale instanceof Locale ? $locale->value : $locale);
             }
         }
     }
