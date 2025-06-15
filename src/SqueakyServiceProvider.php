@@ -13,9 +13,9 @@ class SqueakyServiceProvider extends PackageServiceProvider
 
         // Set Profanify path
         if (getenv('RUNNING_TESTS') === '1') {
-            $profanifyBasePath = realpath('vendor/jonpurvis/profanify/src/Config');
+            $profanifyBasePath = realpath('vendor/pestphp/pest-plugin-profanity/src/Config');
         } else {
-            $profanifyBasePath = base_path('vendor').'/jonpurvis/profanify/src/Config';
+            $profanifyBasePath = base_path('vendor').'/pestphp/pest-plugin-profanity/src/Config';
         }
 
         // Language Specific Configs
@@ -37,7 +37,7 @@ class SqueakyServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('clean')
+            ->name('squeaky')
             ->hasTranslations();
     }
 }
