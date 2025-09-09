@@ -91,11 +91,13 @@ Squeaky currently supports the following languages:
 
 - Arabic
 - Danish
-- Dutch
 - English
-- Italian
-- Portuguese
 - Spanish
+- Italian
+- Japanese
+- Dutch
+- Brazilian Portuguese
+- Russian
 
 ## Contributing
 Contributions to the package are more than welcome! Depending on the type of change, there's a few extra steps that will
