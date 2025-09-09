@@ -21,6 +21,7 @@ class SqueakyServiceProvider extends PackageServiceProvider
         // Language Specific Configs
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/ar.php', 'profanify-ar');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/da.php', 'profanify-da');
+        $this->mergeConfigFrom($profanifyBasePath.'/profanities/da.php', 'profanify-de');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/en.php', 'profanify-en');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/es.php', 'profanify-es');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/it.php', 'profanify-it');
@@ -38,7 +39,7 @@ class SqueakyServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('clean')
+            ->name('squeaky')
             ->hasTranslations();
     }
 }
