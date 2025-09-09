@@ -8,17 +8,19 @@ enum Locale: string
 
     case Danish = 'da';
 
+    case Dutch = 'nl';
+
     case English = 'en';
 
-    case Spanish = 'es';
+    case German = 'de';
 
     case Italian = 'it';
 
     case Japanese = 'ja';
 
-    case Dutch = 'nl';
-
     case Portuguese = 'pt_BR';
 
     case Russian = 'ru';
+
+    case Spanish = 'es';
 }
