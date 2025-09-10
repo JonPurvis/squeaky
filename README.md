@@ -15,7 +15,7 @@ Squeaky (short for Squeaky Clean) is a Laravel validation rule that you can add 
 user submitted input such as a name or biography, is free of profanity and therefore, clean. Just add `new Clean()` to
 your rules and you're good to go!
 
-Squeaky is powered by [Profanify](https://github.com/JonPurvis/profanify/), which is a PestPHP Plugin that
+Squeaky is powered by [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanity), which is a PestPHP Plugin that
 does the same thing, but for code. By utilising the profanity in that package, Squeaky is powerful from the get-go and
 provides support for numerous locales, not just English.
 
@@ -137,7 +137,9 @@ Squeaky currently supports the following languages:
 
 - Arabic
 - Danish
+- Danish
 - English
+- German
 - Spanish
 - Italian
 - Japanese
@@ -150,16 +152,16 @@ Contributions to the package are more than welcome! Depending on the type of cha
 need carrying out:
 
 ### Existing Locale Changes
-These changes should be done in [Profanify](https://github.com/JonPurvis/profanify) and a new release should be tagged.
-Dependabot will then open a PR on this repo. Once that's been merged, it should be good to go because the config will
-already be getting loaded.
+These changes should be done in [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanit) and a new 
+release should be tagged. Dependabot will then open a PR on this repo. Once that's been merged, it should be good to 
+go because the config will already be getting loaded.
 
 ### New Locale Support
-The new locale config will need adding to [Profanify](https://github.com/JonPurvis/profanify) first and a new release 
-should be tagged. Dependabot will then open a PR on this repo. Additionally, the new config will need loading in
-within the `boot` method of the service provider of this package. 
+The new locale config will need adding to [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanit)
+first and a new release should be tagged. Dependabot will then open a PR on this repo. Additionally, the new config 
+will need loading in within the `boot` method of the service provider of this package. 
 
 A new case will also need adding to the `JonPurvis/Squeaky/Enums/Locale` enum to support the new locale.
 
 ### Functionality Changes
-For changes to how this rule works, these should be done in this package. No change needed to Profanify.
+For changes to how this rule works, these should be done in this package. No change needed to Pest Profanity Plugin.
