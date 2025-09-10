@@ -21,16 +21,49 @@ class Clean implements ValidationRule
 
         $this->ensureLocalesAreValid($locales);
 
+        // Get custom configuration
+        $customBlockedWords = Config::get('squeaky.blocked_words', []);
+        $customAllowedWords = Config::get('squeaky.allowed_words', []);
+        $caseSensitive = Config::get('squeaky.case_sensitive', false);
+
+        // Prepare the value for comparison
+        $valueToCheck = $caseSensitive ? $value : Str::lower($value);
+
+        // Check custom blocked words first (these override everything)
+        foreach ($customBlockedWords as $blockedWord) {
+            $wordToCheck = $caseSensitive ? $blockedWord : Str::lower($blockedWord);
+            $regexFlags = $caseSensitive ? '' : 'i';
+            
+            if (preg_match('/\b' . preg_quote($wordToCheck, '/') . '\b/' . $regexFlags, $valueToCheck)) {
+                $fail(trans('message'))->translate([
+                    'attribute' => $attribute,
+                ], $this->getLocaleValue($locales[0]));
+
+                return;
+            }
+        }
+
+        // Check locale-specific profanity lists
         foreach ($locales as $locale) {
             $profanities = Config::get($this->configFileName($locale));
 
-            $lowerValue = Str::lower($value);
             foreach ($profanities as $profanity) {
-                if (preg_match('/\b' . preg_quote($profanity, '/') . '\b/i', $lowerValue)) {
+                // Skip if this word is explicitly allowed
+                $profanityToCheck = $caseSensitive ? $profanity : Str::lower($profanity);
+                
+                if (in_array($profanityToCheck, array_map(function ($word) use ($caseSensitive) {
+                    return $caseSensitive ? $word : Str::lower($word);
+                }, $customAllowedWords))) {
+                    continue;
+                }
+
+                $regexFlags = $caseSensitive ? '' : 'i';
+                if (preg_match('/\b' . preg_quote($profanityToCheck, '/') . '\b/' . $regexFlags, $valueToCheck)) {
                     $fail(trans('message'))->translate([
                         'attribute' => $attribute,
                     ], $this->getLocaleValue($locale));
-                    break;
+                    
+                    return;
                 }
             }
         }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Translation\ArrayLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\Validator;
@@ -83,3 +84,60 @@ it('throws an exception if one of the locales does not have a profanity config l
     exception: InvalidArgumentException::class,
     exceptionMessage: 'The locale [\'invalid\'] is not supported.'
 );
+
+it('respects custom blocked words from config', function () {
+    Config::set('squeaky.blocked_words', ['company_secret', 'internal_term']);
+    
+    $v = new Validator($this->translator, ['name' => 'company_secret'], ['name' => new Clean]);
+    
+    expect($v->fails())->toBeTrue()
+        ->and($v->errors()->all())->toBe(['The name field is not clean']);
+});
+
+it('respects custom allowed words from config', function () {
+    Config::set('squeaky.allowed_words', ['analytics', 'scunthorpe']);
+    
+    $v = new Validator($this->translator, ['name' => 'analytics'], ['name' => new Clean]);
+    
+    expect($v->passes())->toBeTrue();
+});
+
+it('custom blocked words override locale profanity', function () {
+    Config::set('squeaky.blocked_words', ['hello']);
+    
+    $v = new Validator($this->translator, ['name' => 'hello'], ['name' => new Clean]);
+    
+    expect($v->fails())->toBeTrue()
+        ->and($v->errors()->all())->toBe(['The name field is not clean']);
+});
+
+it('custom allowed words override locale profanity', function () {
+    Config::set('squeaky.allowed_words', ['fuck']);
+    
+    $v = new Validator($this->translator, ['name' => 'fuck'], ['name' => new Clean]);
+    
+    expect($v->passes())->toBeTrue();
+});
+
+it('respects case sensitivity setting', function () {
+    Config::set('squeaky.case_sensitive', true);
+    Config::set('squeaky.blocked_words', ['CompanySecret']);
+    
+    $v = new Validator($this->translator, ['name' => 'companysecret'], ['name' => new Clean]);
+    
+    expect($v->passes())->toBeTrue();
+    
+    $v2 = new Validator($this->translator, ['name' => 'CompanySecret'], ['name' => new Clean]);
+    
+    expect($v2->fails())->toBeTrue()
+        ->and($v2->errors()->all())->toBe(['The name field is not clean']);
+});
+
+it('case insensitive by default', function () {
+    Config::set('squeaky.blocked_words', ['CompanySecret']);
+    
+    $v = new Validator($this->translator, ['name' => 'companysecret'], ['name' => new Clean]);
+    
+    expect($v->fails())->toBeTrue()
+        ->and($v->errors()->all())->toBe(['The name field is not clean']);
+});
