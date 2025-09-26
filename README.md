@@ -27,6 +27,14 @@ To install Squeaky, you can run the following command in your project's root:
 composer require jonpurvis/squeaky
 ```
 
+After installation, you can publish the configuration file to customize the package behavior:
+
+```bash
+php artisan vendor:publish --provider="JonPurvis\Squeaky\SqueakyServiceProvider"
+```
+
+This will create a `config/squeaky.php` file in your application where you can configure custom blocked and allowed words.
+
 ## Examples
 
 Let's take a look at how Squeaky works. As it's a Laravel Validation rule, there's not really that much to it. You 
@@ -84,7 +92,45 @@ found in any of them, an error will appear in the validation errors.
 
 The really cool thing about this, is the error will be returned in the language that failed. So if the failure was
 found in the `it` profanity list, the package assumes the user is Italian and returns the error message in Italian to
-let them know that their value is not clean. 
+let them know that their value is not clean.
+
+## Configuration
+
+Squeaky provides a publishable configuration file that allows you to customize the package behavior for your specific application needs.
+
+### Custom Words
+
+You can specify custom words that should be treated as profanity or explicitly allowed:
+
+```php
+// config/squeaky.php
+return [
+    'blocked_words' => [
+        'company_secret',
+        'internal_term',
+        'restricted_word',
+    ],
+    
+    'allowed_words' => [
+        'analytics',
+        'scunthorpe',
+        'penistone',
+    ],
+    
+    'case_sensitive' => false,
+];
+```
+
+- **`blocked_words`**: Words that will be treated as profanity regardless of the locale-specific profanity lists. These override everything else.
+- **`allowed_words`**: Words that will be explicitly allowed even if they appear in the locale-specific profanity lists.
+- **`case_sensitive`**: Determines whether word matching should be case-sensitive. Defaults to `false` for case-insensitive matching.
+
+### Priority Order
+
+The validation follows this priority order:
+1. Custom blocked words (highest priority - always blocked)
+2. Custom allowed words (override locale profanity)
+3. Locale-specific profanity lists (lowest priority) 
 
 ## Languages
 Squeaky currently supports the following languages:
