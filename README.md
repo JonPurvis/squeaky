@@ -137,7 +137,6 @@ Squeaky currently supports the following languages:
 
 - Arabic
 - Danish
-- Danish
 - English
 - German
 - Spanish
@@ -152,12 +151,12 @@ Contributions to the package are more than welcome! Depending on the type of cha
 need carrying out:
 
 ### Existing Locale Changes
-These changes should be done in [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanit) and a new 
+These changes should be done in [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanity) and a new 
 release should be tagged. Dependabot will then open a PR on this repo. Once that's been merged, it should be good to 
 go because the config will already be getting loaded.
 
 ### New Locale Support
-The new locale config will need adding to [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanit)
+The new locale config will need adding to [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanity)
 first and a new release should be tagged. Dependabot will then open a PR on this repo. Additionally, the new config 
 will need loading in within the `boot` method of the service provider of this package. 
 
