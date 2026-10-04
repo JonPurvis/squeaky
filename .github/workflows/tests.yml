@@ -34,13 +34,13 @@ jobs:
     steps:
 
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions: ${{ matrix.os == 'windows-latest' && 'dom, mbstring, zip' || 'dom, mbstring, zip, pcntl' }}
+        extensions: ${{ matrix.os == 'windows-latest' && 'dom, mbstring, zip, fileinfo' || 'dom, mbstring, zip, fileinfo, pcntl' }}
         coverage: pcov
 
     - name: Get Composer cache directory
