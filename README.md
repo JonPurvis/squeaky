@@ -1,14 +1,16 @@
-<img src="art/banner.png">
+<p align="center">
+    <img src="art/banner.png" alt="Squeaky">
+    <p align="center">
+        <a href="https://github.com/JonPurvis/squeaky/actions"><img alt="GitHub Workflow Status (main)" src="https://github.com/JonPurvis/squeaky/actions/workflows/tests.yml/badge.svg"></a>
+        <a href="https://packagist.org/packages/jonpurvis/squeaky"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/jonpurvis/squeaky"></a>
+        <a href="https://packagist.org/packages/jonpurvis/squeaky"><img alt="Latest Version" src="https://img.shields.io/packagist/v/jonpurvis/squeaky"></a>
+        <a href="https://packagist.org/packages/jonpurvis/squeaky"><img alt="License" src="https://img.shields.io/packagist/l/jonpurvis/squeaky"></a>
+    </p>
+</p>
 
+------
 # Squeaky
 A Laravel Validation Rule that helps catch profanity in your application.
-
-[![Tests](https://github.com/JonPurvis/squeaky/actions/workflows/tests.yml/badge.svg)](https://github.com/JonPurvis/squeaky/actions/workflows/tests.yml)
-![GitHub last commit](https://img.shields.io/github/last-commit/jonpurvis/squeaky)
-![Packagist PHP Version](https://img.shields.io/packagist/dependency-v/jonpurvis/squeaky/php)
-![GitHub issues](https://img.shields.io/github/issues/jonpurvis/squeaky)
-![GitHub](https://img.shields.io/github/license/jonpurvis/squeaky)
-![Packagist Downloads](https://img.shields.io/packagist/dt/jonpurvis/squeaky)
 
 ## Introduction
 Squeaky (short for Squeaky Clean) is a Laravel validation rule that you can add your Laravel application, to ensure any
@@ -147,20 +149,6 @@ Squeaky currently supports the following languages:
 - Russian
 
 ## Contributing
-Contributions to the package are more than welcome! Depending on the type of change, there's a few extra steps that will
-need carrying out:
+Contributions to the package are more than welcome - open an Issue or submit a Pull Request. Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-### Existing Locale Changes
-These changes should be done in [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanity) and a new 
-release should be tagged. Dependabot will then open a PR on this repo. Once that's been merged, it should be good to 
-go because the config will already be getting loaded.
-
-### New Locale Support
-The new locale config will need adding to [Pest Profanity Plugin](https://github.com/pestphp/pest-plugin-profanity)
-first and a new release should be tagged. Dependabot will then open a PR on this repo. Additionally, the new config 
-will need loading in within the `boot` method of the service provider of this package. 
-
-A new case will also need adding to the `JonPurvis/Squeaky/Enums/Locale` enum to support the new locale.
-
-### Functionality Changes
-For changes to how this rule works, these should be done in this package. No change needed to Pest Profanity Plugin.
+To report a security vulnerability, please see [SECURITY.md](SECURITY.md).
