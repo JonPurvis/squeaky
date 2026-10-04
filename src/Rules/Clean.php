@@ -33,8 +33,8 @@ class Clean implements ValidationRule
         foreach ($customBlockedWords as $blockedWord) {
             $wordToCheck = $caseSensitive ? $blockedWord : Str::lower($blockedWord);
             $regexFlags = $caseSensitive ? '' : 'i';
-            
-            if (preg_match('/\b' . preg_quote($wordToCheck, '/') . '\b/' . $regexFlags, $valueToCheck)) {
+
+            if (preg_match('/\b'.preg_quote($wordToCheck, '/').'\b/'.$regexFlags, $valueToCheck)) {
                 $fail(trans('message'))->translate([
                     'attribute' => $attribute,
                 ], $this->getLocaleValue($locales[0]));
@@ -50,19 +50,17 @@ class Clean implements ValidationRule
             foreach ($profanities as $profanity) {
                 // Skip if this word is explicitly allowed
                 $profanityToCheck = $caseSensitive ? $profanity : Str::lower($profanity);
-                
-                if (in_array($profanityToCheck, array_map(function ($word) use ($caseSensitive) {
-                    return $caseSensitive ? $word : Str::lower($word);
-                }, $customAllowedWords))) {
+
+                if (in_array($profanityToCheck, array_map(fn (string $word): string => $caseSensitive ? $word : Str::lower($word), $customAllowedWords))) {
                     continue;
                 }
 
                 $regexFlags = $caseSensitive ? '' : 'i';
-                if (preg_match('/\b' . preg_quote($profanityToCheck, '/') . '\b/' . $regexFlags, $valueToCheck)) {
+                if (preg_match('/\b'.preg_quote($profanityToCheck, '/').'\b/'.$regexFlags, $valueToCheck)) {
                     $fail(trans('message'))->translate([
                         'attribute' => $attribute,
                     ], $this->getLocaleValue($locale));
-                    
+
                     return;
                 }
             }
@@ -76,11 +74,11 @@ class Clean implements ValidationRule
     protected function ensureLocalesAreValid(array $locales): void
     {
         foreach ($locales as $locale) {
-            if (!is_string($locale) && !$locale instanceof Locale) {
+            if (! is_string($locale) && ! $locale instanceof Locale) {
                 throw new InvalidArgumentException('The locale must be a string or JonPurvis\Squeaky\Enums\Locale enum.');
             }
 
-            if (!Config::has($this->configFileName($locale))) {
+            if (! Config::has($this->configFileName($locale))) {
                 throw new InvalidArgumentException("The locale ['{$locale}'] is not supported.");
             }
         }
@@ -102,6 +100,6 @@ class Clean implements ValidationRule
      */
     protected function configFileName(string|Locale $locale): string
     {
-        return 'profanify-' . $this->getLocaleValue($locale);
+        return 'profanify-'.$this->getLocaleValue($locale);
     }
 }
