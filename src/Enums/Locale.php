@@ -12,6 +12,8 @@ enum Locale: string
 
     case English = 'en';
 
+    case French = 'fr';
+
     case German = 'de';
 
     case Italian = 'it';
@@ -23,4 +25,8 @@ enum Locale: string
     case Russian = 'ru';
 
     case Spanish = 'es';
+
+    case ChineseSimplified = 'zh_CN';
+
+    case ChineseTraditional = 'zh_TW';
 }
