@@ -24,11 +24,14 @@ class SqueakyServiceProvider extends PackageServiceProvider
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/de.php', 'profanify-de');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/en.php', 'profanify-en');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/es.php', 'profanify-es');
+        $this->mergeConfigFrom($profanifyBasePath.'/profanities/fr.php', 'profanify-fr');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/it.php', 'profanify-it');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/ja.php', 'profanify-ja');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/nl.php', 'profanify-nl');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/pt_BR.php', 'profanify-pt_BR');
         $this->mergeConfigFrom($profanifyBasePath.'/profanities/ru.php', 'profanify-ru');
+        $this->mergeConfigFrom($profanifyBasePath.'/profanities/zh_CN.php', 'profanify-zh_CN');
+        $this->mergeConfigFrom($profanifyBasePath.'/profanities/zh_TW.php', 'profanify-zh_TW');
 
         // Load the package configuration
         $this->mergeConfigFrom(__DIR__.'/../config/squeaky.php', 'squeaky');

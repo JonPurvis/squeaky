@@ -140,6 +140,7 @@ Squeaky currently supports the following languages:
 - Arabic
 - Danish
 - English
+- French
 - German
 - Spanish
 - Italian
@@ -147,6 +148,8 @@ Squeaky currently supports the following languages:
 - Dutch
 - Brazilian Portuguese
 - Russian
+- Chinese (Simplified)
+- Chinese (Traditional)
 
 ## Contributing
 Contributions to the package are more than welcome - open an Issue or submit a Pull Request. Please see [CONTRIBUTING.md](CONTRIBUTING.md).
